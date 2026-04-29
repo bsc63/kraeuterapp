@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <title>Kräuterpflanzenpflege – Treppe Ostseite</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#48bb78">
+  <link rel="stylesheet" href="style.css">
+  
+
+</head>
+<body>
+<header>
+  <h1>Kräuter-Treppe Chemnitz – Pflege & Küche</h1>
+  <p>Ostseite · Pflanzkübel-Treppe · Sonne bis ca. 14:00 Uhr · Fokus: Pflege, Ernte & Verwendung</p>
+  <div class="tagline">Kräuter: Koriander, Estragon, Thymian, Bohnenkraut, Salbei, Dill, Lavendel, Minze, Majoran</div>
+</header>
+
+<main>
+  <!-- Linke Spalte: Auswahl, Pflege, Verwendung -->
+  <section class="card">
+    <h2>
+      Kräuterprofil
+      <span class="pill">Pflege & Verwendung</span>
+    </h2>
+
+    <div class="row">
+      <div>
+        <label for="herbSelect">Kraut auswählen</label>
+        <select id="herbSelect"></select>
+      </div>
+      <div>
+        <label>Standort</label>
+        <div class="chips">
+          <span class="chip chip--accent">Treppe, Pflanzkübel</span>
+          <span class="chip">Ostseite</span>
+          <span class="chip">Sonne bis ~14:00 Uhr</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">Pflegehinweise</div>
+    <ul id="careList" class="care-list"></ul>
+
+    <div class="section-title">Ernte & Pflanzenteile</div>
+    <ul id="harvestList" class="harvest-list"></ul>
+
+    <div class="section-title">Küche – Schwerpunkte</div>
+    <div class="chips" id="cuisineChips"></div>
+    <ul id="useList" class="use-list"></ul>
+
+    <div class="section-title">Eigene Notizen</div>
+    <textarea id="notes" placeholder="Beobachtungen, Sorten, Besonderheiten … (wird lokal im Browser gespeichert)"></textarea>
+    <div class="hint">Notizen werden automatisch pro Kraut im Browser gespeichert (localStorage).</div>
+    <div class="section-title">Aussaat / Pflanztermin</div>
+	<input type="date" id="sowDate" />
+	<div class="hint">Wird pro Kraut gespeichert. Daraus werden Pflege-Termine automatisch berechnet.</div>
+
+  </section>
+
+  <!-- Rechte Spalte: Wetter & Aufgaben -->
+  <section class="card">
+    <h2>
+      Wetter & Pflegeplanung
+      <span class="pill">Chemnitz</span>
+    </h2>
+
+    <div id="weatherBlock">
+      <div class="badge-weather">
+        <span>🌦️</span>
+        <span>Wetter Chemnitz (Ostlage relevant für Gießen)</span>
+      </div>
+      <div class="weather-main">
+        <div class="weather-temp" id="weatherTemp">– °C</div>
+        <div class="weather-meta" id="weatherMeta">Lade aktuelle Daten …</div>
+      </div>
+      <div class="hint" id="weatherHint">
+        Tipp wird anhand Temperatur und Niederschlag geschätzt.
+      </div>
+    </div>
+
+    <hr style="border:none;border-top:1px solid var(--border);margin:0.75rem 0;" />
+
+    <div class="tasks-header">
+      <span>Pflege-Termine</span>
+      <div>
+        <button class="btn-outline btn" id="btnAddTemplate">+ Standardaufgaben</button>
+      </div>
+    </div>
+
+    <div class="row" style="margin-bottom:0.5rem;">
+      <div>
+        <label for="taskHerb">Kraut</label>
+        <select id="taskHerb"></select>
+      </div>
+      <div>
+        <label for="taskType">Aufgabe</label>
+        <select id="taskType">
+          <option value="giessen">Gießen</option>
+          <option value="duengen">Düngen</option>
+          <option value="ernten">Ernten</option>
+          <option value="rueckschnitt">Rückschnitt</option>
+          <option value="kontrolle">Schädlings-/Gesundheitskontrolle</option>
+        </select>
+      </div>
+      
+      
+      
+    </div>
+
+      
+      
+      <div>
+        <label for="taskDate">Datum</label>
+        <input type="date" id="taskDate" />
+      </div>
+    </div>
+    <div class="row" style="margin-bottom:0.5rem;">
+      <div>
+        <label for="taskNote">Kurznotiz</label>
+        <input type="text" id="taskNote" placeholder="z.B. &quot;nach heißem Tag extra gießen&quot;" />
+      </div>
+      <div style="align-self:flex-end;text-align:right;">
+        <button class="btn" id="btnAddTask">Aufgabe hinzufügen</button>
+      </div>
+    </div>
+
+    <ul id="taskList" class="task-list"></ul>
+    
+    <hr style="border:none;border-top:1px solid var(--border);margin:1rem 0;" />
+
+      <h2 style="font-size:1.1rem;margin-bottom:0.5rem;">Zeitachse</h2>
+      <div id="timelineContainer" class="timeline-container">
+      <div id="timeline" class="timeline"></div>
+      
+      <hr style="border:none;border-top:1px solid var(--border);margin:1rem 0;" />
+
+<h2 style="font-size:1.1rem;margin-bottom:0.5rem;">Daten sichern / laden</h2>
+
+<div class="row" style="margin-bottom:0.5rem;">
+  <button class="btn" id="btnExport">JSON exportieren</button>
+  <button class="btn-outline btn" id="btnImport">JSON importieren</button>
+  <input type="file" id="importFile" accept="application/json" style="display:none;">
+</div>
+
+      
+  </section>
+</main>
+
+<footer>
+  Daten bleiben lokal im Browser (localStorage). Wetterdaten: Open‑Meteo (Chemnitz, ca. 50.83°N, 12.92°E).
+</footer>
+
+<script src="script.js"></script>
+
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js");
+}
+</script>
+
+</body>
+</html>

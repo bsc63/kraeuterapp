@@ -1,10 +1,11 @@
 {
-  "name": "Kräuterplaner",
-  "short_name": "Kräuter",
-  "start_url": "./index.html",
+  "name": "Kräuter-App Version 2",
+  "short_name": "Kräuter V2",
+  "start_url": "/kraeuterapp/version2/",
+  "scope": "/kraeuterapp/version2/",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#48bb78",
+  "theme_color": "#4CAF50",
   "icons": [
     {
       "src": "icons/icon-192.png",
